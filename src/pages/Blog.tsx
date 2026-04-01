@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Search, Calendar, User, ArrowRight } from 'lucide-react';
+import { Search, Calendar, ArrowRight } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 interface BlogPost {
