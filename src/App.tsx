@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -16,7 +16,17 @@ import Partnership from './pages/Partnership';
 import Community from './pages/Community';
 import Dashboard from './pages/admin/Dashboard';
 import Login from './pages/admin/Login';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -29,6 +39,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+        <ScrollToTop />
         <div className="min-h-screen flex flex-col">
           <Navbar currentPage={currentPage} onNavigate={handleNavigate} />
           <main className="flex-1">
