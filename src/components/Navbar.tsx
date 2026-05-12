@@ -1,3 +1,6 @@
+import { Menu, X } from 'lucide-react';
+import { useState } from 'react';
+
 interface NavbarProps {
   currentPage?: string;
   onNavigate?: (page: string) => void;
@@ -5,7 +8,7 @@ interface NavbarProps {
 
 export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
   void currentPage;
-  void onNavigate;
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const links = [
     { label: 'Home', href: '/' },
@@ -17,6 +20,11 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
     { label: 'FAQ', href: '/faq' },
     { label: 'Contact', href: '/contact' },
   ];
+
+  const handleMobileNavigate = (href: string) => {
+    setIsMenuOpen(false);
+    onNavigate?.(href.replace('/', '') || 'home');
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-slate-100 bg-white/85 backdrop-blur-xl">
@@ -49,8 +57,42 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
               Donate Now
             </a>
           </div>
+
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen((open) => !open)}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-brand-blue shadow-soft transition-all hover:border-brand-red/30 hover:text-brand-red lg:hidden"
+            aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
+
+      {isMenuOpen && (
+        <div className="border-t border-slate-100 bg-white px-4 pb-5 pt-2 shadow-xl lg:hidden">
+          <div className="mx-auto grid max-w-7xl gap-2">
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => handleMobileNavigate(link.href)}
+                className="rounded-2xl px-4 py-3 text-base font-bold text-brand-blue transition-all hover:bg-blue-50 hover:text-brand-red"
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href="/donate"
+              onClick={() => handleMobileNavigate('/donate')}
+              className="mt-2 rounded-2xl bg-brand-red px-4 py-3 text-center text-base font-black text-white shadow-lg shadow-red-900/20 transition-all hover:bg-rose-700"
+            >
+              Donate Now
+            </a>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
