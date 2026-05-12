@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: scriptureunionzambia
+    runtime: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.1
+      - key: NPM_CONFIG_PRODUCTION
+        value: false
