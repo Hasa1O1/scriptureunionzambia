@@ -1,216 +1,97 @@
-import { useEffect, useState } from 'react';
-import { ArrowRight, BookOpen, Users, Heart, Globe } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { ArrowRight, BookOpen, HeartHandshake, Sparkles, Users } from 'lucide-react';
 
 interface HomeProps {
-  onNavigate: (page: string) => void;
-}
-
-interface Testimonial {
-  id: string;
-  name: string;
-  content: string;
-  role: string;
-  image_url: string;
+  onNavigate?: (page: string) => void;
 }
 
 export default function Home({ onNavigate }: HomeProps) {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [email, setEmail] = useState('');
-  const [subscribeSuccess, setSubscribeSuccess] = useState(false);
+  void onNavigate;
 
-  useEffect(() => {
-    fetchTestimonials();
-  }, []);
-
-  const fetchTestimonials = async () => {
-    const { data } = await supabase
-      .from('testimonials')
-      .select('*')
-      .eq('featured', true)
-      .limit(3);
-
-    if (data) setTestimonials(data);
-  };
-
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const { error } = await supabase
-      .from('newsletter_subscriptions')
-      .insert([{ email }]);
-
-    if (!error) {
-      setSubscribeSuccess(true);
-      setEmail('');
-      setTimeout(() => setSubscribeSuccess(false), 3000);
-    }
-  };
+  const highlights = [
+    { icon: BookOpen, title: 'Bible Engagement', text: 'Creative programs that help young people discover scripture with clarity and confidence.' },
+    { icon: Users, title: 'Youth Leadership', text: 'Equipping students and communities with values-driven leadership for everyday impact.' },
+    { icon: HeartHandshake, title: 'Mission Partnerships', text: 'Collaborating with schools, churches, and partners to serve Zambia with excellence.' },
+  ];
 
   return (
-    <div className="min-h-screen">
-      <div className="relative bg-gradient-to-br from-blue-600 to-blue-800 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-5xl font-bold mb-6 leading-tight">
-                Spreading God's Word Across Zambia
-              </h1>
-              <p className="text-xl mb-8 text-blue-100 leading-relaxed">
-                Join us in our mission to reach youth, build communities, and share the gospel
-                throughout Zambia and beyond.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <button
-                  onClick={() => onNavigate('community')}
-                  className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all shadow-lg flex items-center gap-2"
-                >
-                  Join Our Community <ArrowRight size={20} />
-                </button>
-                <button
-                  onClick={() => onNavigate('about')}
-                  className="bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-800 transition-all border-2 border-white"
-                >
-                  Learn More
-                </button>
-              </div>
+    <main className="min-h-screen overflow-hidden bg-white">
+      <section className="relative px-6 lg:px-8">
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(135deg,rgba(11,59,140,0.08),rgba(255,255,255,0.65),rgba(225,29,72,0.08))]" />
+        <div className="absolute left-8 top-24 h-24 w-24 rounded-full bg-brand-red/10 blur-2xl animate-float" />
+        <div className="absolute right-10 top-36 h-36 w-36 rounded-full bg-brand-blue/10 blur-3xl animate-float" />
+
+        <div className="mx-auto grid max-w-7xl items-center gap-14 py-24 lg:grid-cols-[1.05fr_0.95fr] lg:py-32">
+          <div>
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-red/20 bg-white/80 px-4 py-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-red shadow-soft backdrop-blur">
+              <Sparkles size={16} />
+              Empowering the Next Generation
             </div>
-            <div className="hidden md:block">
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-white/20 p-3 rounded-lg">
-                      <BookOpen className="text-white" size={24} />
+
+            <h1 className="max-w-5xl text-5xl font-black leading-[0.95] tracking-tight text-brand-blue md:text-7xl">
+              Faith-led impact for a{' '}
+              <span className="relative inline-block text-brand-red">
+                brighter
+                <span className="absolute -bottom-2 left-0 h-3 w-full rounded-full bg-brand-red/15" />
+              </span>{' '}
+              Zambia.
+            </h1>
+
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
+              Scripture Union Zambia inspires children, youth, and communities through modern discipleship, leadership development, and purposeful service.
+            </p>
+
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <a href="/partnership" className="group relative overflow-hidden rounded-full bg-brand-blue px-8 py-4 font-bold text-white shadow-2xl shadow-blue-900/20 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-lightBlue">
+                <span className="absolute inset-y-0 left-0 w-1/2 bg-white/20 blur-xl animate-shine" />
+                <span className="relative flex items-center justify-center gap-2">
+                  Partner With Us
+                  <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                </span>
+              </a>
+              <a href="/about" className="rounded-full border border-slate-200 bg-white px-8 py-4 text-center font-bold text-brand-blue shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-brand-red/30 hover:text-brand-red">
+                Discover Our Work
+              </a>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-brand-blue/20 via-white to-brand-red/20 blur-2xl" />
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/80 bg-white p-6 shadow-2xl shadow-blue-950/10">
+              <div className="rounded-[1.5rem] bg-brand-blue p-8 text-white">
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-100">National Mission</p>
+                <h2 className="mt-6 text-4xl font-black leading-tight">Building young lives with purpose, scripture, and service.</h2>
+                <div className="mt-10 grid grid-cols-2 gap-4">
+                  {['Schools', 'Churches', 'Families', 'Communities'].map((item) => (
+                    <div key={item} className="rounded-2xl bg-white/10 p-4 backdrop-blur transition-transform duration-300 hover:-translate-y-1 hover:bg-white/15">
+                      <p className="text-sm font-bold">{item}</p>
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-lg">Biblical Teaching</h3>
-                      <p className="text-blue-100">Spreading God's word through scripture</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-white/20 p-3 rounded-lg">
-                      <Users className="text-white" size={24} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-lg">Youth Outreach</h3>
-                      <p className="text-blue-100">Engaging young people in faith</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-white/20 p-3 rounded-lg">
-                      <Globe className="text-white" size={24} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-lg">Global Impact</h3>
-                      <p className="text-blue-100">Connecting Christians worldwide</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
+              <div className="-mt-8 ml-auto mr-4 max-w-xs rounded-3xl border border-slate-100 bg-white p-5 shadow-xl">
+                <p className="text-sm font-semibold text-slate-500">Impact focus</p>
+                <p className="mt-2 text-3xl font-black text-brand-red">Faith. Leadership. Community.</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Mission</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Scripture Union Zambia is dedicated to making God's Good News known to children, young
-            people, and families, and encouraging people of all ages to meet God daily through the
-            Bible and prayer.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
-          <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border-t-4 border-blue-600">
-            <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-              <BookOpen className="text-blue-600" size={32} />
-            </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Word of God</h3>
-            <p className="text-gray-600 leading-relaxed">
-              We spread the gospel through Bible studies, scripture reading programs, and teaching
-              materials that bring people closer to God.
-            </p>
-          </div>
-
-          <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border-t-4 border-red-600">
-            <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-              <Heart className="text-red-600" size={32} />
-            </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Community Care</h3>
-            <p className="text-gray-600 leading-relaxed">
-              Building supportive communities where believers can grow together in faith, fellowship,
-              and service to others.
-            </p>
-          </div>
-
-          <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border-t-4 border-blue-600">
-            <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-              <Users className="text-blue-600" size={32} />
-            </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Youth Ministry</h3>
-            <p className="text-gray-600 leading-relaxed">
-              Engaging young people through camps, school programs, and youth groups that nurture
-              spiritual growth and leadership.
-            </p>
-          </div>
-        </div>
-
-        {testimonials.length > 0 && (
-          <div className="mb-20">
-            <h2 className="text-4xl font-bold text-gray-800 text-center mb-12">
-              What People Say
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial) => (
-                <div key={testimonial.id} className="bg-white p-8 rounded-xl shadow-lg">
-                  <p className="text-gray-600 mb-6 italic leading-relaxed">"{testimonial.content}"</p>
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-                      <span className="text-white font-semibold">
-                        {testimonial.name.charAt(0)}
-                      </span>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-800">{testimonial.name}</p>
-                      <p className="text-sm text-gray-500">{testimonial.role}</p>
-                    </div>
-                  </div>
+      <section className="px-6 pb-24 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-6 md:grid-cols-3">
+            {highlights.map(({ icon: Icon, title, text }) => (
+              <article key={title} className="group rounded-[1.75rem] border border-slate-100 bg-white p-8 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:border-brand-blue/20 hover:shadow-2xl hover:shadow-blue-950/10">
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-blue text-white transition-colors group-hover:bg-brand-red">
+                  <Icon size={26} />
                 </div>
-              ))}
-            </div>
+                <h3 className="text-2xl font-black text-brand-blue">{title}</h3>
+                <p className="mt-4 leading-7 text-slate-600">{text}</p>
+              </article>
+            ))}
           </div>
-        )}
-
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-12 text-white text-center">
-          <h2 className="text-3xl font-bold mb-4">Stay Connected</h2>
-          <p className="text-xl mb-8 text-blue-100">
-            Subscribe to our newsletter for updates on events, programs, and spiritual resources
-          </p>
-          {subscribeSuccess ? (
-            <div className="bg-white/20 backdrop-blur-lg rounded-lg p-4 max-w-md mx-auto">
-              <p className="text-white font-semibold">Thank you for subscribing!</p>
-            </div>
-          ) : (
-            <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto flex gap-4">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                className="flex-1 px-6 py-4 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white"
-              />
-              <button
-                type="submit"
-                className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-colors"
-              >
-                Subscribe
-              </button>
-            </form>
-          )}
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

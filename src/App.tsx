@@ -8,6 +8,7 @@ import Services from './pages/Services';
 import Team from './pages/Team';
 import Blog from './pages/Blog';
 import Gallery from './pages/Gallery';
+import FAQ from './pages/FAQ';
 import Testimonials from './pages/Testimonials';
 import Contact from './pages/Contact';
 import Donate from './pages/Donate';
@@ -39,6 +40,7 @@ function App() {
               <Route path="/team" element={<Team />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/gallery" element={<Gallery />} />
+              <Route path="/faq" element={<FAQ />} />
               <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/donate" element={<Donate />} />
