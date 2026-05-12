@@ -1,10 +1,13 @@
 import { Notebook as Facebook, Battery as Twitter, Drama as Instagram, Route as Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
 }
 
 export default function Footer({ onNavigate }: FooterProps) {
+  void onNavigate;
+
   return (
     <footer className="relative overflow-hidden bg-brand-blue text-white">
       <div className="absolute left-0 top-0 h-64 w-64 rounded-full bg-brand-red/20 blur-3xl" />
@@ -16,12 +19,12 @@ export default function Footer({ onNavigate }: FooterProps) {
               <p className="text-sm font-bold uppercase tracking-[0.25em] text-red-100">Join the mission</p>
               <h3 className="mt-3 text-3xl font-black md:text-4xl">Partner with Scripture Union Zambia to shape the next generation.</h3>
             </div>
-            <button
-              onClick={() => onNavigate('partnership')}
+            <Link
+              to="/partnership"
               className="rounded-full bg-brand-red px-7 py-4 text-sm font-black text-white shadow-xl shadow-red-950/20 transition-all duration-300 hover:-translate-y-1 hover:bg-rose-700"
             >
               Get Involved
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -46,12 +49,12 @@ export default function Footer({ onNavigate }: FooterProps) {
             <ul className="space-y-2">
               {['About', 'Services', 'Team', 'Blog'].map((item) => (
                 <li key={item}>
-                  <button
-                    onClick={() => onNavigate(item.toLowerCase())}
+                  <Link
+                    to={`/${item.toLowerCase()}`}
                     className="text-blue-100 hover:text-white transition-colors text-sm"
                   >
                     {item}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -61,36 +64,36 @@ export default function Footer({ onNavigate }: FooterProps) {
             <h4 className="text-lg font-semibold mb-4">Get Involved</h4>
             <ul className="space-y-2">
               <li>
-                <button
-                  onClick={() => onNavigate('donate')}
+                <Link
+                  to="/donate"
                   className="text-blue-100 hover:text-white transition-colors text-sm"
                 >
                   Donate
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate('partnership')}
+                <Link
+                  to="/partnership"
                   className="text-blue-100 hover:text-white transition-colors text-sm"
                 >
                   Partner With Us
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate('community')}
+                <Link
+                  to="/community"
                   className="text-blue-100 hover:text-white transition-colors text-sm"
                 >
                   Join Community
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate('contact')}
+                <Link
+                  to="/contact"
                   className="text-blue-100 hover:text-white transition-colors text-sm"
                 >
                   Contact Us
-                </button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -130,12 +133,12 @@ export default function Footer({ onNavigate }: FooterProps) {
 
         <div className="border-t border-white/10 mt-10 pt-8 text-center text-sm text-blue-100">
           <p>&copy; {new Date().getFullYear()} Scripture Union Zambia. All rights reserved.</p>
-          <button
-            onClick={() => onNavigate('admin')}
+          <Link
+            to="/admin"
             className="mt-2 text-blue-200 hover:text-white text-xs"
           >
             Admin
-          </button>
+          </Link>
         </div>
       </div>
     </footer>

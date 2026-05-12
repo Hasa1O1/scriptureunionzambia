@@ -1,5 +1,6 @@
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface NavbarProps {
   currentPage?: string;
@@ -46,16 +47,16 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
 
           <div className="hidden lg:flex items-center rounded-full border border-slate-100 bg-white px-2 py-2 shadow-soft">
             {links.map((link) => (
-              <a key={link.href} href={link.href} className="rounded-full px-4 py-2 text-sm font-bold text-brand-blue transition-all hover:bg-blue-50 hover:text-brand-red">
+              <Link key={link.href} to={link.href} className="rounded-full px-4 py-2 text-sm font-bold text-brand-blue transition-all hover:bg-blue-50 hover:text-brand-red">
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
           <div className="hidden md:flex items-center">
-            <a href="/donate" className="rounded-full bg-brand-red px-6 py-3 text-sm font-black tracking-wide text-white shadow-lg shadow-red-900/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-700">
+            <Link to="/donate" className="rounded-full bg-brand-red px-6 py-3 text-sm font-black tracking-wide text-white shadow-lg shadow-red-900/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-700">
               Donate Now
-            </a>
+            </Link>
           </div>
 
           <button
@@ -74,22 +75,22 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
         <div className="border-t border-slate-100 bg-white px-4 pb-5 pt-2 shadow-xl lg:hidden">
           <div className="mx-auto grid max-w-7xl gap-2">
             {links.map((link) => (
-              <a
+              <Link
                 key={link.href}
-                href={link.href}
+                to={link.href}
                 onClick={() => handleMobileNavigate(link.href)}
                 className="rounded-2xl px-4 py-3 text-base font-bold text-brand-blue transition-all hover:bg-blue-50 hover:text-brand-red"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <a
-              href="/donate"
+            <Link
+              to="/donate"
               onClick={() => handleMobileNavigate('/donate')}
               className="mt-2 rounded-2xl bg-brand-red px-4 py-3 text-center text-base font-black text-white shadow-lg shadow-red-900/20 transition-all hover:bg-rose-700"
             >
               Donate Now
-            </a>
+            </Link>
           </div>
         </div>
       )}

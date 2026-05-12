@@ -1,4 +1,5 @@
 import { ArrowRight, BookOpen, HeartHandshake, Sparkles, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface HomeProps {
   onNavigate?: (page: string) => void;
@@ -41,16 +42,16 @@ export default function Home({ onNavigate }: HomeProps) {
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <a href="/partnership" className="group relative overflow-hidden rounded-full bg-brand-blue px-8 py-4 font-bold text-white shadow-2xl shadow-blue-900/20 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-lightBlue">
+              <Link to="/partnership" className="group relative overflow-hidden rounded-full bg-brand-blue px-8 py-4 font-bold text-white shadow-2xl shadow-blue-900/20 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-lightBlue">
                 <span className="absolute inset-y-0 left-0 w-1/2 bg-white/20 blur-xl animate-shine" />
                 <span className="relative flex items-center justify-center gap-2">
                   Partner With Us
                   <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                 </span>
-              </a>
-              <a href="/about" className="rounded-full border border-slate-200 bg-white px-8 py-4 text-center font-bold text-brand-blue shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-brand-red/30 hover:text-brand-red">
+              </Link>
+              <Link to="/about" className="rounded-full border border-slate-200 bg-white px-8 py-4 text-center font-bold text-brand-blue shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-brand-red/30 hover:text-brand-red">
                 Discover Our Work
-              </a>
+              </Link>
             </div>
           </div>
 
