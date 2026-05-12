@@ -22,9 +22,21 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
     { label: 'Contact', href: '/contact' },
   ];
 
-  const handleMobileNavigate = (href: string) => {
+  const scrollToTop = () => {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    window.setTimeout(() => {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }, 0);
+  };
+
+  const handleNavigate = (href: string) => {
     setIsMenuOpen(false);
     onNavigate?.(href.replace('/', '') || 'home');
+    scrollToTop();
   };
 
   return (
@@ -47,14 +59,14 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
 
           <div className="hidden lg:flex items-center rounded-full border border-slate-100 bg-white px-2 py-2 shadow-soft">
             {links.map((link) => (
-              <Link key={link.href} to={link.href} className="rounded-full px-4 py-2 text-sm font-bold text-brand-blue transition-all hover:bg-blue-50 hover:text-brand-red">
+              <Link key={link.href} to={link.href} onClick={() => handleNavigate(link.href)} className="rounded-full px-4 py-2 text-sm font-bold text-brand-blue transition-all hover:bg-blue-50 hover:text-brand-red">
                 {link.label}
               </Link>
             ))}
           </div>
 
           <div className="hidden md:flex items-center">
-            <Link to="/donate" className="rounded-full bg-brand-red px-6 py-3 text-sm font-black tracking-wide text-white shadow-lg shadow-red-900/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-700">
+            <Link to="/donate" onClick={() => handleNavigate('/donate')} className="rounded-full bg-brand-red px-6 py-3 text-sm font-black tracking-wide text-white shadow-lg shadow-red-900/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-700">
               Donate Now
             </Link>
           </div>
@@ -78,7 +90,7 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
               <Link
                 key={link.href}
                 to={link.href}
-                onClick={() => handleMobileNavigate(link.href)}
+                onClick={() => handleNavigate(link.href)}
                 className="rounded-2xl px-4 py-3 text-base font-bold text-brand-blue transition-all hover:bg-blue-50 hover:text-brand-red"
               >
                 {link.label}
@@ -86,7 +98,7 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
             ))}
             <Link
               to="/donate"
-              onClick={() => handleMobileNavigate('/donate')}
+              onClick={() => handleNavigate('/donate')}
               className="mt-2 rounded-2xl bg-brand-red px-4 py-3 text-center text-base font-black text-white shadow-lg shadow-red-900/20 transition-all hover:bg-rose-700"
             >
               Donate Now

@@ -16,13 +16,15 @@ import Partnership from './pages/Partnership';
 import Community from './pages/Community';
 import Dashboard from './pages/admin/Dashboard';
 import Login from './pages/admin/Login';
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  useLayoutEffect(() => {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   }, [pathname]);
 
   return null;
