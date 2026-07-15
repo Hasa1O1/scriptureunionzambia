@@ -1,4 +1,5 @@
 import { Heart, Globe, Users, BookOpen } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Donate() {
   return (
@@ -122,9 +123,9 @@ export default function Donate() {
             Interested in making a recurring donation, corporate sponsorship, or partnering with us
             in other ways? We'd love to discuss how you can support our mission.
           </p>
-          <button className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+          <Link to="/contact" className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
             Contact Us About Giving
-          </button>
+          </Link>
         </div>
       </div>
     </div>

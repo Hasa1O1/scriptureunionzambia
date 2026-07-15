@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { Mail, Phone } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface TeamMember {
   id: string;
@@ -99,9 +100,9 @@ export default function Team() {
               <p className="text-gray-600 mb-4">
                 Get involved in our programs and help us reach more people with God's word
               </p>
-              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors w-full">
+              <Link to="/community" className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors w-full text-center">
                 Learn More
-              </button>
+              </Link>
             </div>
 
             <div className="bg-white p-6 rounded-xl shadow-md">
@@ -109,9 +110,9 @@ export default function Team() {
               <p className="text-gray-600 mb-4">
                 Explore full-time ministry positions and join our dedicated team
               </p>
-              <button className="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors w-full">
+              <Link to="/contact" className="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors w-full text-center">
                 View Openings
-              </button>
+              </Link>
             </div>
           </div>
         </div>

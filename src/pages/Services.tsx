@@ -1,4 +1,5 @@
 import { BookOpen, Users, Heart, School, Hop as Home, Globe } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Services() {
   const services = [
@@ -167,15 +168,15 @@ export default function Services() {
             there's a place for you
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+            <Link to="/community" className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
               Volunteer
-            </button>
-            <button className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+            </Link>
+            <Link to="/partnership" className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-colors">
               Partner With Us
-            </button>
-            <button className="bg-white text-gray-800 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            </Link>
+            <Link to="/contact" className="bg-white text-gray-800 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
               Contact Us
-            </button>
+            </Link>
           </div>
         </div>
       </div>

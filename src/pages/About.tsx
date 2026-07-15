@@ -114,22 +114,6 @@ export default function About() {
             </div>
           </div>
         </div>
-
-        <div className="mt-20 bg-gray-900 text-white rounded-2xl p-12 text-center">
-          <h2 className="text-3xl font-bold mb-4">Join Our Story</h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Whether through partnership, volunteering, or prayer support, you can be part of what
-            God is doing in Zambia
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-              Partner With Us
-            </button>
-            <button className="bg-white text-gray-800 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-              Contact Us
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );

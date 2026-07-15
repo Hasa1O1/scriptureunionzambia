@@ -42,7 +42,7 @@ export default function Home({ onNavigate }: HomeProps) {
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Link to="/partnership" className="group relative overflow-hidden rounded-full bg-brand-blue px-8 py-4 font-bold text-white shadow-2xl shadow-blue-900/20 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-lightBlue">
+              <Link to="/partnership" className="group relative overflow-hidden rounded-full bg-brand-blue px-8 py-4 font-bold text-white shadow-2xl shadow-blue-900/20 transition-all duration-300 hover:-translate-y-1 hover:bg-blue-700">
                 <span className="absolute inset-y-0 left-0 w-1/2 bg-white/20 blur-xl animate-shine" />
                 <span className="relative flex items-center justify-center gap-2">
                   Partner With Us

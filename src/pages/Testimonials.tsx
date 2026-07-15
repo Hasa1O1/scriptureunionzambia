@@ -129,11 +129,12 @@ export default function Testimonials() {
             Have you been impacted by Scripture Union Zambia? We'd love to hear your story and how
             God has worked in your life through our programs and ministry.
           </p>
-          <button className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+          <Link to="/contact" className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
             Share Your Testimony
-          </button>
+          </Link>
         </div>
       </div>
     </div>
   );
+}
 }

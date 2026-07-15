@@ -227,12 +227,12 @@ export default function Partnership() {
             Get in touch with us today.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+            <Link to="/contact" className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
               Email Us
-            </button>
-            <button className="bg-white text-gray-800 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            </Link>
+            <Link to="/contact" className="bg-white text-gray-800 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
               Call Us
-            </button>
+            </Link>
           </div>
         </div>
       </div>
