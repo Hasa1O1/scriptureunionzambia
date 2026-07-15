@@ -16,20 +16,18 @@ export default function Home({ onNavigate }: HomeProps) {
 
   return (
     <main className="min-h-screen overflow-hidden bg-white">
-      <section className="relative overflow-hidden px-6 lg:px-8">
-        <div
-          className="absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/hero%20image.jpg')" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-blue/90 via-brand-blue/80 to-slate-900/85"
-          aria-hidden="true"
-        />
-        <div className="absolute left-8 top-24 h-24 w-24 rounded-full bg-brand-red/20 blur-2xl animate-float" />
-        <div className="absolute right-10 top-36 h-36 w-36 rounded-full bg-white/10 blur-3xl animate-float" />
+      <section className="relative isolate overflow-hidden px-6 lg:px-8">
+        <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: "url('/hero-image.jpg')" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/90 via-brand-blue/80 to-slate-900/85" />
+          <div className="absolute left-8 top-24 h-24 w-24 rounded-full bg-brand-red/20 blur-2xl animate-float" />
+          <div className="absolute right-10 top-36 h-36 w-36 rounded-full bg-white/10 blur-3xl animate-float" />
+        </div>
 
-        <div className="mx-auto grid max-w-7xl items-center gap-14 py-24 lg:grid-cols-[1.05fr_0.95fr] lg:py-32">
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 py-24 lg:grid-cols-[1.05fr_0.95fr] lg:py-32">
           <div>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-soft backdrop-blur">
               <Sparkles size={16} />
