@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Users, Heart, Globe, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { openWhatsAppWithMessage } from '../lib/whatsapp';
 
 export default function Community() {
   const [formData, setFormData] = useState({
@@ -12,12 +13,24 @@ export default function Community() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
-    // Simulate form submission for static site
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const message = [
+      'Hello Scripture Union Zambia,',
+      '',
+      'I would like to join your community.',
+      '',
+      `*Full Name:* ${formData.full_name}`,
+      `*Email:* ${formData.email}`,
+      formData.phone ? `*Phone:* ${formData.phone}` : null,
+      formData.country ? `*Country:* ${formData.country}` : null,
+    ]
+      .filter(Boolean)
+      .join('\n');
+
+    openWhatsAppWithMessage(message);
     setSuccess(true);
     setFormData({
       full_name: '',
@@ -125,7 +138,7 @@ export default function Community() {
 
             {success && (
               <div className="bg-green-50 border border-green-200 text-green-800 p-4 rounded-lg mb-6">
-                Welcome to the Scripture Union Zambia community! We're excited to have you with us.
+                Your community registration is ready in WhatsApp. Send it to complete your request.
               </div>
             )}
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Handshake, Send, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { openWhatsAppWithMessage } from '../lib/whatsapp';
 
 export default function Partnership() {
   const [formData, setFormData] = useState({
@@ -13,12 +14,25 @@ export default function Partnership() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
-    // Simulate form submission for static site
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const message = [
+      'Hello Scripture Union Zambia,',
+      '',
+      'I am interested in partnering with you.',
+      '',
+      `*Organization:* ${formData.organization_name}`,
+      `*Contact Person:* ${formData.contact_name}`,
+      `*Email:* ${formData.email}`,
+      formData.phone ? `*Phone:* ${formData.phone}` : null,
+      `*Partnership Proposal:* ${formData.message}`,
+    ]
+      .filter(Boolean)
+      .join('\n');
+
+    openWhatsAppWithMessage(message);
     setSuccess(true);
     setFormData({
       organization_name: '',
@@ -124,8 +138,7 @@ export default function Partnership() {
 
             {success && (
               <div className="bg-green-50 border border-green-200 text-green-800 p-4 rounded-lg mb-6">
-                Thank you for your interest in partnering with us! We'll review your application
-                and be in touch soon.
+                Your partnership application is ready in WhatsApp. Send it to complete your submission.
               </div>
             )}
 

@@ -16,28 +16,36 @@ export default function Home({ onNavigate }: HomeProps) {
 
   return (
     <main className="min-h-screen overflow-hidden bg-white">
-      <section className="relative px-6 lg:px-8">
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(135deg,rgba(11,59,140,0.08),rgba(255,255,255,0.65),rgba(225,29,72,0.08))]" />
-        <div className="absolute left-8 top-24 h-24 w-24 rounded-full bg-brand-red/10 blur-2xl animate-float" />
-        <div className="absolute right-10 top-36 h-36 w-36 rounded-full bg-brand-blue/10 blur-3xl animate-float" />
+      <section className="relative overflow-hidden px-6 lg:px-8">
+        <div
+          className="absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/hero%20image.jpg')" }}
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-blue/90 via-brand-blue/80 to-slate-900/85"
+          aria-hidden="true"
+        />
+        <div className="absolute left-8 top-24 h-24 w-24 rounded-full bg-brand-red/20 blur-2xl animate-float" />
+        <div className="absolute right-10 top-36 h-36 w-36 rounded-full bg-white/10 blur-3xl animate-float" />
 
         <div className="mx-auto grid max-w-7xl items-center gap-14 py-24 lg:grid-cols-[1.05fr_0.95fr] lg:py-32">
           <div>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-red/20 bg-white/80 px-4 py-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-red shadow-soft backdrop-blur">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-soft backdrop-blur">
               <Sparkles size={16} />
               Empowering the Next Generation
             </div>
 
-            <h1 className="max-w-5xl text-5xl font-black leading-[0.95] tracking-tight text-brand-blue md:text-7xl">
+            <h1 className="max-w-5xl text-5xl font-black leading-[0.95] tracking-tight text-white md:text-7xl">
               Faith-led impact for a{' '}
               <span className="relative inline-block text-brand-red">
                 brighter
-                <span className="absolute -bottom-2 left-0 h-3 w-full rounded-full bg-brand-red/15" />
+                <span className="absolute -bottom-2 left-0 h-3 w-full rounded-full bg-brand-red/30" />
               </span>{' '}
               Zambia.
             </h1>
 
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-blue-100 md:text-xl">
               Scripture Union Zambia inspires children, youth, and communities through modern discipleship, leadership development, and purposeful service.
             </p>
 
@@ -49,7 +57,7 @@ export default function Home({ onNavigate }: HomeProps) {
                   <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                 </span>
               </Link>
-              <Link to="/about" className="rounded-full border border-slate-200 bg-white px-8 py-4 text-center font-bold text-brand-blue shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-brand-red/30 hover:text-brand-red">
+              <Link to="/about" className="rounded-full border border-white/30 bg-white/10 px-8 py-4 text-center font-bold text-white shadow-soft backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-white/50 hover:bg-white/20">
                 Discover Our Work
               </Link>
             </div>

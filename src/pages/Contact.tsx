@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { openWhatsAppWithMessage } from '../lib/whatsapp';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -11,12 +12,24 @@ export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
-    // Simulate form submission for static site
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const message = [
+      'Hello Scripture Union Zambia,',
+      '',
+      'I would like to get in touch.',
+      '',
+      `*Name:* ${formData.name}`,
+      `*Email:* ${formData.email}`,
+      formData.phone ? `*Phone:* ${formData.phone}` : null,
+      `*Message:* ${formData.message}`,
+    ]
+      .filter(Boolean)
+      .join('\n');
+
+    openWhatsAppWithMessage(message);
     setSuccess(true);
     setFormData({ name: '', email: '', phone: '', message: '' });
     setTimeout(() => setSuccess(false), 5000);
@@ -97,7 +110,7 @@ export default function Contact() {
 
             {success && (
               <div className="bg-green-50 border border-green-200 text-green-800 p-4 rounded-lg mb-6">
-                Thank you for your message! We'll get back to you soon.
+                Your message is ready in WhatsApp. Send it to complete your enquiry.
               </div>
             )}
 
