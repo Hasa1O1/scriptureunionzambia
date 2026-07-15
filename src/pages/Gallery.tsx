@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { X } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 
 interface GalleryItem {
   id: string;
@@ -19,26 +18,126 @@ interface PortfolioItem {
 }
 
 export default function Gallery() {
-  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
-  const [portfolioItems, setPortfolioItems] = useState<PortfolioItem[]>([]);
   const [activeTab, setActiveTab] = useState<'gallery' | 'portfolio'>('gallery');
   const [selectedImage, setSelectedImage] = useState<GalleryItem | PortfolioItem | null>(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchItems();
-  }, []);
+  const galleryItems: GalleryItem[] = [
+    {
+      id: '1',
+      title: 'Youth Gathering',
+      description: 'Young people attending a Scripture Union event',
+      image_url: '/462327626_3817841565131512_3105741374037572772_n.jpg',
+      category: 'Events'
+    },
+    {
+      id: '2',
+      title: 'Scripture Union Camps',
+      description: 'Promotional material for Scripture Union Camps',
+      image_url: '/515443642_1153385956815761_1429405437632139446_n.jpg',
+      category: 'Camps'
+    },
+    {
+      id: '3',
+      title: 'School Outreach',
+      description: 'Scripture Union engaging with students at Nyamphande Boarding Secondary School',
+      image_url: '/515493919_1153385816815775_5257536905134674602_n.jpg',
+      category: 'School Ministry'
+    },
+    {
+      id: '4',
+      title: 'Impacting the Next Generation',
+      description: 'Poster highlighting Scripture Union\'s mission to nurture young people',
+      image_url: '/628853463_1340596101428078_5237788768145361674_n.jpg',
+      category: 'Promotional'
+    },
+    {
+      id: '5',
+      title: 'Become a Volunteer',
+      description: 'Poster encouraging volunteering with Scripture Union Zambia',
+      image_url: '/629234937_1335280031959685_5645147075016249036_n.jpg',
+      category: 'Volunteer'
+    },
+    {
+      id: '6',
+      title: 'Book Stall',
+      description: 'Individuals browsing books at a Scripture Union book stall',
+      image_url: '/646282342_1351845693636452_5849163424167388565_n.jpg',
+      category: 'Events'
+    },
+    {
+      id: '7',
+      title: 'Community Event',
+      description: 'Scripture Union community gathering',
+      image_url: '/729451545_1447678804053140_2645793966506090363_n.jpg',
+      category: 'Community'
+    },
+    {
+      id: '8',
+      title: 'Youth Program',
+      description: 'Young people participating in Scripture Union activities',
+      image_url: '/732152282_1450155303805490_9111053529225243974_n.jpg',
+      category: 'Youth'
+    },
+    {
+      id: '9',
+      title: 'School Ministry',
+      description: 'Scripture Union outreach in schools',
+      image_url: '/733483155_1451329863688034_982667408915272225_n.jpg',
+      category: 'School Ministry'
+    },
+    {
+      id: '10',
+      title: 'Bible Study',
+      description: 'Group Bible study session',
+      image_url: '/733810509_1453068240180863_105677559353614685_n.jpg',
+      category: 'Bible Study'
+    },
+    {
+      id: '11',
+      title: 'Leadership Training',
+      description: 'Training young leaders for ministry',
+      image_url: '/734101400_1451329913688029_7987794730398927868_n.jpg',
+      category: 'Training'
+    },
+    {
+      id: '12',
+      title: 'Worship Service',
+      description: 'Youth worship and praise session',
+      image_url: '/734528777_1451329827021371_7465215159529363103_n.jpg',
+      category: 'Worship'
+    },
+    {
+      id: '13',
+      title: 'Camp Activities',
+      description: 'Activities during Scripture Union camp',
+      image_url: '/736273134_1453068490180838_3389442464885663339_n.jpg',
+      category: 'Camps'
+    },
+  ];
 
-  const fetchItems = async () => {
-    const [galleryResponse, portfolioResponse] = await Promise.all([
-      supabase.from('gallery_items').select('*').order('created_at', { ascending: false }),
-      supabase.from('portfolio_items').select('*').order('created_at', { ascending: false }),
-    ]);
-
-    if (galleryResponse.data) setGalleryItems(galleryResponse.data);
-    if (portfolioResponse.data) setPortfolioItems(portfolioResponse.data);
-    setLoading(false);
-  };
+  const portfolioItems: PortfolioItem[] = [
+    {
+      id: '1',
+      title: 'School Ministry Program',
+      description: 'Comprehensive Bible engagement programs in schools across Zambia',
+      image_url: '/515493919_1153385816815775_5257536905134674602_n.jpg',
+      year: '2024'
+    },
+    {
+      id: '2',
+      title: 'Youth Camp Initiative',
+      description: 'Annual youth camps that combine fun activities with biblical teaching',
+      image_url: '/515443642_1153385956815761_1429405437632139446_n.jpg',
+      year: '2024'
+    },
+    {
+      id: '3',
+      title: 'Community Outreach',
+      description: 'Serving local communities through various programs',
+      image_url: '/462327626_3817841565131512_3105741374037572772_n.jpg',
+      year: '2024'
+    },
+  ];
 
   return (
     <div className="min-h-screen">
@@ -77,18 +176,9 @@ export default function Gallery() {
           </div>
         </div>
 
-        {loading ? (
-          <div className="text-center py-20">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          </div>
-        ) : activeTab === 'gallery' ? (
-          galleryItems.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-gray-600 text-lg">No gallery items available yet.</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {galleryItems.map((item) => (
+        {activeTab === 'gallery' ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {galleryItems.map((item) => (
                 <div
                   key={item.id}
                   onClick={() => setSelectedImage(item)}
@@ -118,11 +208,6 @@ export default function Gallery() {
                 </div>
               ))}
             </div>
-          )
-        ) : portfolioItems.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-gray-600 text-lg">No portfolio items available yet.</p>
-          </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-8">
             {portfolioItems.map((item) => (

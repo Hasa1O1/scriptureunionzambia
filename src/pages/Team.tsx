@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabase';
 import { Mail, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -13,22 +11,32 @@ interface TeamMember {
 }
 
 export default function Team() {
-  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchTeamMembers();
-  }, []);
-
-  const fetchTeamMembers = async () => {
-    const { data } = await supabase
-      .from('team_members')
-      .select('*')
-      .order('order_index', { ascending: true });
-
-    if (data) setTeamMembers(data);
-    setLoading(false);
-  };
+  const teamMembers: TeamMember[] = [
+    {
+      id: '1',
+      name: 'John Banda',
+      role: 'National Director',
+      bio: 'Leading Scripture Union Zambia with over 15 years of ministry experience.',
+      image_url: '',
+      order_index: 1
+    },
+    {
+      id: '2',
+      name: 'Mary Phiri',
+      role: 'Programs Coordinator',
+      bio: 'Overseeing all youth programs and camp initiatives across the country.',
+      image_url: '',
+      order_index: 2
+    },
+    {
+      id: '3',
+      name: 'David Mwamba',
+      role: 'School Ministry Lead',
+      bio: 'Coordinating Bible engagement programs in schools throughout Zambia.',
+      image_url: '',
+      order_index: 3
+    },
+  ];
 
   return (
     <div className="min-h-screen">
@@ -42,17 +50,8 @@ export default function Team() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        {loading ? (
-          <div className="text-center py-20">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          </div>
-        ) : teamMembers.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-gray-600 text-lg">Our team information will be available soon.</p>
-          </div>
-        ) : (
-          <div className="grid md:grid-cols-3 gap-8">
-            {teamMembers.map((member) => (
+        <div className="grid md:grid-cols-3 gap-8">
+          {teamMembers.map((member) => (
               <div
                 key={member.id}
                 className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
@@ -82,7 +81,6 @@ export default function Team() {
               </div>
             ))}
           </div>
-        )}
 
         <div className="mt-20 bg-gradient-to-br from-blue-50 to-white rounded-2xl p-12">
           <div className="text-center mb-8">

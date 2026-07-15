@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -16,14 +15,11 @@ export default function Contact() {
     e.preventDefault();
     setSubmitting(true);
 
-    const { error } = await supabase.from('contact_submissions').insert([formData]);
-
-    if (!error) {
-      setSuccess(true);
-      setFormData({ name: '', email: '', phone: '', message: '' });
-      setTimeout(() => setSuccess(false), 5000);
-    }
-
+    // Simulate form submission for static site
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setSuccess(true);
+    setFormData({ name: '', email: '', phone: '', message: '' });
+    setTimeout(() => setSuccess(false), 5000);
     setSubmitting(false);
   };
 

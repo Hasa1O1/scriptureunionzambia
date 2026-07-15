@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
 import { Quote } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { Link } from 'react-router-dom';
 
 interface Testimonial {
   id: string;
@@ -12,22 +11,48 @@ interface Testimonial {
 }
 
 export default function Testimonials() {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchTestimonials();
-  }, []);
-
-  const fetchTestimonials = async () => {
-    const { data } = await supabase
-      .from('testimonials')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (data) setTestimonials(data);
-    setLoading(false);
-  };
+  const testimonials: Testimonial[] = [
+    {
+      id: '1',
+      name: 'Sarah Mwamba',
+      content: 'Scripture Union changed my life. The youth camps helped me grow in my faith and build lasting friendships with other believers.',
+      role: 'Youth Camp Participant',
+      image_url: '',
+      featured: true
+    },
+    {
+      id: '2',
+      name: 'James Banda',
+      content: 'The school ministry program has been instrumental in helping students understand the Bible and apply it to their daily lives.',
+      role: 'School Teacher',
+      image_url: '',
+      featured: true
+    },
+    {
+      id: '3',
+      name: 'Mary Phiri',
+      content: 'Volunteering with Scripture Union has been a blessing. I\'ve seen young people transformed by the power of God\'s Word.',
+      role: 'Volunteer',
+      image_url: '',
+      featured: false
+    },
+    {
+      id: '4',
+      name: 'David Mwamba',
+      content: 'The Bible study materials are excellent and have helped our church youth group grow spiritually.',
+      role: 'Youth Leader',
+      image_url: '',
+      featured: false
+    },
+    {
+      id: '5',
+      name: 'Grace Chanda',
+      content: 'My children attended the summer camp and came back with a renewed passion for God and His Word.',
+      role: 'Parent',
+      image_url: '',
+      featured: false
+    },
+  ];
 
   return (
     <div className="min-h-screen">
@@ -41,11 +66,7 @@ export default function Testimonials() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        {loading ? (
-          <div className="text-center py-20">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          </div>
-        ) : testimonials.length === 0 ? (
+        {testimonials.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-gray-600 text-lg">Testimonials will be available soon.</p>
           </div>
@@ -136,5 +157,4 @@ export default function Testimonials() {
       </div>
     </div>
   );
-}
 }

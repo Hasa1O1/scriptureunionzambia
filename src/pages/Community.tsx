@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Users, Heart, Globe, Send } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 import { Link } from 'react-router-dom';
 
 export default function Community() {
@@ -17,19 +16,16 @@ export default function Community() {
     e.preventDefault();
     setSubmitting(true);
 
-    const { error } = await supabase.from('community_members').insert([formData]);
-
-    if (!error) {
-      setSuccess(true);
-      setFormData({
-        full_name: '',
-        email: '',
-        phone: '',
-        country: '',
-      });
-      setTimeout(() => setSuccess(false), 5000);
-    }
-
+    // Simulate form submission for static site
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setSuccess(true);
+    setFormData({
+      full_name: '',
+      email: '',
+      phone: '',
+      country: '',
+    });
+    setTimeout(() => setSuccess(false), 5000);
     setSubmitting(false);
   };
 

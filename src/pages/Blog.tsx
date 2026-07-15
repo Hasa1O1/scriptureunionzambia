@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Search, Calendar, ArrowRight } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 
 interface BlogPost {
   id: string;
@@ -13,43 +12,45 @@ interface BlogPost {
 }
 
 export default function Blog() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [loading, setLoading] = useState(true);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  const posts: BlogPost[] = [
+    {
+      id: '1',
+      title: 'Youth Camp 2024: A Life-Changing Experience',
+      content: 'Our annual youth camp was an incredible time of spiritual growth, fellowship, and fun. Over 100 young people gathered to deepen their faith and build lasting friendships.',
+      excerpt: 'Over 100 young people gathered for our annual youth camp, experiencing spiritual growth and building lasting friendships.',
+      featured_image: '/729451545_1447678804053140_2645793966506090363_n.jpg',
+      created_at: '2024-06-15',
+      author_id: '1'
+    },
+    {
+      id: '2',
+      title: 'School Ministry Expansion',
+      content: 'We are excited to announce our expansion into 5 new schools, reaching more students with the message of hope and faith through Bible engagement programs.',
+      excerpt: 'Expanding our school ministry to reach more students with Bible engagement programs.',
+      featured_image: '/515493919_1153385816815775_5257536905134674602_n.jpg',
+      created_at: '2024-05-20',
+      author_id: '1'
+    },
+    {
+      id: '3',
+      title: 'Volunteer Training Program',
+      content: 'Our new volunteer training program is equipping believers with the skills they need to effectively minister to young people in their communities.',
+      excerpt: 'Equipping believers with skills to effectively minister to young people in their communities.',
+      featured_image: '/734101400_1451329913688029_7987794730398927868_n.jpg',
+      created_at: '2024-04-10',
+      author_id: '1'
+    },
+  ];
 
-  useEffect(() => {
-    if (searchTerm) {
-      const filtered = posts.filter(
-        (post) =>
-          post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          post.excerpt?.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredPosts(filtered);
-    } else {
-      setFilteredPosts(posts);
-    }
-  }, [searchTerm, posts]);
-
-  const fetchPosts = async () => {
-    const { data } = await supabase
-      .from('blog_posts')
-      .select('*')
-      .eq('published', true)
-      .order('created_at', { ascending: false });
-
-    if (data) {
-      setPosts(data);
-      setFilteredPosts(data);
-    }
-    setLoading(false);
-  };
+  const filteredPosts = searchTerm ? posts.filter(
+    (post) =>
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.excerpt?.toLowerCase().includes(searchTerm.toLowerCase())
+  ) : posts;
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -125,11 +126,7 @@ export default function Blog() {
           </div>
         </div>
 
-        {loading ? (
-          <div className="text-center py-20">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          </div>
-        ) : filteredPosts.length === 0 ? (
+        {filteredPosts.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-gray-600 text-lg">
               {searchTerm ? 'No posts found matching your search.' : 'No blog posts available yet.'}
