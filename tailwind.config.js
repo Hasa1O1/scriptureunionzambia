@@ -9,9 +9,9 @@ export default {
     extend: {
       colors: {
         brand: {
-          blue: '#0F172A', // Deep slate/navy for a corporate feel
-          lightBlue: '#1E293B', // Slightly lighter for secondary elements
-          red: '#E11D48', // Crisp, modern red for accents/CTAs
+          blue: '#0000FF', // Primary blue
+          red: '#FF0000', // Primary red
+          amber: '#D0A44F', // Secondary amber
           white: '#FFFFFF',
           offWhite: '#F8FAFC', // For subtle section backgrounds
         }

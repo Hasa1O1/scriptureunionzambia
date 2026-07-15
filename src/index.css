@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --primary-blue: #0B3B8C;
-  --secondary-red: #E11D48;
+  --primary-blue: #0000FF;
+  --secondary-red: #FF0000;
+  --secondary-amber: #D0A44F;
   --white: #FFFFFF;
   --light-gray: #F8FAFC;
   --dark-gray: #0F172A;
