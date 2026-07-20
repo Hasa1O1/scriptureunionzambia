@@ -1,4 +1,4 @@
-import { Notebook as Facebook, Battery as Twitter, Drama as Instagram, Route as Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Mail, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface FooterProps {
@@ -115,17 +115,13 @@ export default function Footer({ onNavigate }: FooterProps) {
               </li>
             </ul>
             <div className="flex space-x-4 mt-6">
-              <a href="#" className="rounded-full bg-white/10 p-2 text-blue-100 transition-all hover:-translate-y-1 hover:bg-brand-red hover:text-white">
+              <a 
+                href="https://www.facebook.com/share/18vCPb9W7v/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="rounded-full bg-white/10 p-2 text-blue-100 transition-all hover:-translate-y-1 hover:bg-brand-red hover:text-white"
+              >
                 <Facebook size={20} />
-              </a>
-              <a href="#" className="rounded-full bg-white/10 p-2 text-blue-100 transition-all hover:-translate-y-1 hover:bg-brand-red hover:text-white">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="rounded-full bg-white/10 p-2 text-blue-100 transition-all hover:-translate-y-1 hover:bg-brand-red hover:text-white">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="rounded-full bg-white/10 p-2 text-blue-100 transition-all hover:-translate-y-1 hover:bg-brand-red hover:text-white">
-                <Youtube size={20} />
               </a>
             </div>
           </div>
