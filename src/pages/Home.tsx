@@ -63,9 +63,9 @@ export default function Home({ onNavigate }: HomeProps) {
 
             <h1 className="max-w-5xl text-5xl font-black leading-[0.95] tracking-tight text-white md:text-7xl">
               Faith-led impact for a{' '}
-              <span className="relative inline-block text-brand-red">
+              <span className="relative inline-block text-brand-amber">
                 brighter
-                <span className="absolute -bottom-2 left-0 h-3 w-full rounded-full bg-brand-red/30" />
+                <span className="absolute -bottom-2 left-0 h-3 w-full rounded-full bg-brand-amber/30" />
               </span>{' '}
               Zambia.
             </h1>
