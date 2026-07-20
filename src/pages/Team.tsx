@@ -10,6 +10,14 @@ interface TeamMember {
   order_index: number;
 }
 
+interface CouncilMember {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+  image_url: string;
+}
+
 export default function Team() {
   const teamMembers: TeamMember[] = [
     {
@@ -35,6 +43,51 @@ export default function Team() {
       bio: 'Coordinating Bible engagement programs in schools throughout Zambia.',
       image_url: '',
       order_index: 3
+    },
+  ];
+
+  const councilMembers: CouncilMember[] = [
+    {
+      id: '1',
+      name: 'Rev. Dr. James Chanda',
+      role: 'Council Chairman',
+      bio: 'Providing spiritual leadership and guidance to Scripture Union Zambia for over 20 years.',
+      image_url: ''
+    },
+    {
+      id: '2',
+      name: 'Mrs. Grace Mwamba',
+      role: 'Council Secretary',
+      bio: 'Managing council operations and ensuring effective governance and compliance.',
+      image_url: ''
+    },
+    {
+      id: '3',
+      name: 'Mr. Peter Phiri',
+      role: 'Council Treasurer',
+      bio: 'Overseeing financial stewardship and resource management for the organization.',
+      image_url: ''
+    },
+    {
+      id: '4',
+      name: 'Dr. Sarah Banda',
+      role: 'Council Member',
+      bio: 'Bringing expertise in education and youth development to guide our programs.',
+      image_url: ''
+    },
+    {
+      id: '5',
+      name: 'Mr. Michael Musonda',
+      role: 'Council Member',
+      bio: 'Contributing business and strategic planning expertise to support our mission.',
+      image_url: ''
+    },
+    {
+      id: '6',
+      name: 'Mrs. Esther Tembo',
+      role: 'Council Member',
+      bio: 'Providing pastoral care and counseling expertise for our youth programs.',
+      image_url: ''
     },
   ];
 
@@ -81,6 +134,46 @@ export default function Team() {
               </div>
             ))}
           </div>
+
+        <div className="mt-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">Council Members</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Our council provides spiritual leadership, governance, and strategic guidance to Scripture Union Zambia
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {councilMembers.map((member) => (
+              <div
+                key={member.id}
+                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+              >
+                <div className="h-48 bg-gradient-to-br from-brand-red to-red-700 flex items-center justify-center">
+                  {member.image_url ? (
+                    <img
+                      src={member.image_url}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center">
+                      <span className="text-brand-red text-3xl font-bold">
+                        {member.name.charAt(0)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">{member.name}</h3>
+                  <p className="text-brand-red font-semibold mb-4">{member.role}</p>
+                  {member.bio && (
+                    <p className="text-gray-600 leading-relaxed mb-4">{member.bio}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div className="mt-20 bg-gradient-to-br from-blue-50 to-white rounded-2xl p-12">
           <div className="text-center mb-8">

@@ -1,5 +1,6 @@
 import { ArrowRight, BookOpen, HeartHandshake, Sparkles, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 interface HomeProps {
   onNavigate?: (page: string) => void;
@@ -7,6 +8,32 @@ interface HomeProps {
 
 export default function Home({ onNavigate }: HomeProps) {
   void onNavigate;
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const galleryImages = [
+    '/462327626_3817841565131512_3105741374037572772_n.jpg',
+    '/515443642_1153385956815761_1429405437632139446_n.jpg',
+    '/515493919_1153385816815775_5257536905134674602_n.jpg',
+    '/628853463_1340596101428078_5237788768145361674_n.jpg',
+    '/629234937_1335280031959685_5645147075016249036_n.jpg',
+    '/646282342_1351845693636452_5849163424167388565_n.jpg',
+    '/729451545_1447678804053140_2645793966506090363_n.jpg',
+    '/732152282_1450155303805490_9111053529225243974_n.jpg',
+    '/733483155_1451329863688034_982667408915272225_n.jpg',
+    '/733810509_1453068240180863_105677559353614685_n.jpg',
+    '/734101400_1451329913688029_7987794730398927868_n.jpg',
+    '/734528777_1451329827021371_7465215159529363103_n.jpg',
+    '/736273134_1453068490180838_3389442464885663339_n.jpg',
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % galleryImages.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const highlights = [
     { icon: BookOpen, title: 'Bible Engagement', text: 'Creative programs that help young people discover scripture with clarity and confidence.' },
@@ -62,7 +89,6 @@ export default function Home({ onNavigate }: HomeProps) {
           </div>
 
           <div className="relative">
-            <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-brand-blue/20 via-white to-brand-red/20 blur-2xl" />
             <div className="relative overflow-hidden rounded-[2rem] border border-white/80 bg-white p-6 shadow-2xl shadow-blue-950/10">
               <div className="rounded-[1.5rem] bg-brand-blue p-8 text-white">
                 <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-100">National Mission</p>
@@ -79,6 +105,35 @@ export default function Home({ onNavigate }: HomeProps) {
                 <p className="text-sm font-semibold text-slate-500">Impact focus</p>
                 <p className="mt-2 text-3xl font-black text-brand-red">Faith. Leadership. Community.</p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-24 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-black text-brand-blue mb-4">Our Gallery</h2>
+            <p className="text-lg text-slate-600">Glimpses of our work and impact across Zambia</p>
+          </div>
+          <div className="relative max-w-4xl mx-auto">
+            <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src={galleryImages[currentImageIndex]}
+                alt="Gallery image"
+                className="w-full h-full object-cover transition-opacity duration-500"
+              />
+            </div>
+            <div className="flex justify-center gap-2 mt-4">
+              {galleryImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`h-2 rounded-full transition-all ${
+                    index === currentImageIndex ? 'w-8 bg-brand-blue' : 'w-2 bg-slate-300'
+                  }`}
+                />
+              ))}
             </div>
           </div>
         </div>
